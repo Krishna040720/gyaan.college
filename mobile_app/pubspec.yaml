@@ -1,0 +1,48 @@
+name: gyaan_mobile
+description: "GYAAN.AI - Cross-Platform AI Voice & Practice Learning App for Indian Students (Classes 1-12)"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  # State Management & DI
+  flutter_riverpod: ^2.5.1
+  
+  # Networking & HTTP
+  dio: ^5.7.0
+  http: ^1.2.2
+  
+  # Voice, Audio & Speech
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.2.0
+  permission_handler: ^11.3.1
+  
+  # Math & Formula Rendering
+  flutter_math_fork: ^0.7.2
+  
+  # Local Storage & Offline Cache
+  shared_preferences: ^2.3.2
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
+  
+  # Icons & UI Polish
+  lucide_icons: ^0.257.0
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GyaanConnect — Audit-Driven Stabilization Sprint Plan</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 14mm 15mm 14mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.42;
+      color: #1e293b;
+      background: #ffffff;
+    }
+
+    /* Header styling */
+    .header-banner {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .brand-title {
+      font-size: 20pt;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-accent {
+      color: #d97706;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tagline {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-size: 8pt;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: #64748b;
+      text-transform: uppercase;
+      font-size: 7.2pt;
+      margin-bottom: 1px;
+    }
+
+    /* Section Headings */
+    h2 {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    /* Callout alert cards */
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 9px 12px;
+      margin-bottom: 9px;
+      background: #ffffff;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .card-critical {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      border-left: 4px solid #e11d48;
+    }
+
+    .card-warning {
+      background: #fffbeb;
+      border-color: #fef3c7;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .card-success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      border-left: 4px solid #10b981;
+    }
+
+    .card-info {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      border-left: 4px solid #3b82f6;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      margin-bottom: 10px;
+      font-size: 8.2pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 5px 7px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 6.8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .badge-red {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .badge-amber {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .badge-green {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .badge-blue {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 16px;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    li {
+      margin-bottom: 2.5px;
+    }
+
+    code {
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 7.8pt;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 3px;
+      border-radius: 3px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .work-order {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fafafa;
+    }
+
+    .work-order-title {
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 9.5pt;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding-top: 8px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 7.8pt;
+      color: #64748b;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="header-banner">
+    <div class="brand-row">
+      <div class="brand-title">Gyaan<span class="brand-accent">Connect</span></div>
+      <div class="doc-badge">Stabilization Sprint Specification</div>
+    </div>
+    <div class="tagline">Audit-Driven Stabilization Sprint — Step 1 Verification & Proposed Plan</div>
+    <p style="font-size: 8.5pt; color: #475569; margin-bottom: 4px;">
+      Architecture Preservation: React 19 • Vite 8 • Tailwind CSS v4 • Node.js ESM HTTP Server (Port 3001)
+    </p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <strong>Sprint Phase</strong>
+        Phase 1: Stabilization
+      </div>
+      <div class="meta-item">
+        <strong>Primary Goal</strong>
+        Security & Codebase Health
+      </div>
+      <div class="meta-item">
+        <strong>Pre-condition</strong>
+        Zero Rebuild / No Mock Masquerade
+      </div>
+      <div class="meta-item">
+        <strong>Testing Framework</strong>
+        Vitest Automated Harness
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 1: VERIFICATION OF FINDINGS ==================== -->
+  <h2>Step 1: Independent Verification of the 10 Audit Findings</h2>
+  <p style="font-size: 8.8pt;">
+    Prior to making any file changes, every finding was independently verified against the current repository source code:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 25%;">Audit Finding</th>
+        <th style="width: 12%;">Status</th>
+        <th style="width: 58%;">Verified Code Reference & Technical Evidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td><code>npm run lint</code> failure due to <code>.vite_cache</code></td>
+        <td><span class="badge badge-red">Confirmed</span></td>
+        <td><code>vite.config.js#L7</code> sets <code>cacheDir: './.vite_cache'</code>. Oxlint scans vendor code in <code>.vite_cache/deps/</code>, triggering <strong>3,186 warnings and 14 errors</strong> (exit code 1).</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Missing curriculum API routes</td>
+        <td><span class="badge badge-red">Confirmed</span></td>
+        <td><code>curriculumService.js#L32,L48</code> fetches <code>/api/curriculum/subjects</code> and <code>/api/curriculum/chapters</code>. Neither route exists in <code>server/index.js</code> router, returning <strong>HTTP 404</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td><code>POST /api/evaluate</code> trusts client rubric</td>
+        <td><span class="badge badge-red">Confirmed</span></td>
+        <td><code>server/index.js#L31-L60</code> builds prompt using <code>targetConcept.mustKnowPoints</code> directly from client request body. Vulnerable to prompt injection cheat scoring.</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>API keys persisted in <code>localStorage</code></td>
+        <td><span class="badge badge-amber">Confirmed</span></td>
+        <td><code>GeminiSettingsModal.jsx#L22</code> and <code>App.jsx#L98</code> save keys to <code>localStorage.setItem('gyan_gemini_key', key)</code>, exposing credentials to browser extensions.</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Direct client-to-Gemini browser calls</td>
+        <td><span class="badge badge-amber">Confirmed</span></td>
+        <td><code>aiVoiceService.js#L261-L275,L472-L484</code> executes raw <code>fetch()</code> from browser to <code>https://generativelanguage.googleapis.com/...</code> using the client-stored key.</td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td>Conflicting Board definitions across files</td>
+        <td><span class="badge badge-amber">Confirmed</span></td>
+        <td><code>conceptKnowledgeBase.js</code> has 9 boards, <code>curriculumDatabase.js</code> has 5, and <code>curriculumData.js</code> has 3. <code>curriculumData.js#L374</code> defaults any non-CBSE/ICSE board to UP Board.</td>
+      </tr>
+      <tr>
+        <td><strong>7</strong></td>
+        <td>Procedural fake chapter generation</td>
+        <td><span class="badge badge-amber">Confirmed</span></td>
+        <td><code>curriculumData.js#L647-L727</code> runs <code>generateChaptersForSubject()</code> synthesizing fake titles (<em>"Chapter 1: Mathematics - Unit 1"</em>) and generic quizzes for unverified classes.</td>
+      </tr>
+      <tr>
+        <td><strong>8</strong></td>
+        <td>Automated test suite is missing</td>
+        <td><span class="badge badge-red">Confirmed</span></td>
+        <td><code>package.json</code> contains no <code>test</code> script, no test runner (Vitest/Jest) is installed, and zero <code>*.test.js</code> or <code>*.spec.jsx</code> files exist in the project.</td>
+      </tr>
+      <tr>
+        <td><strong>9</strong></td>
+        <td>React state-update warnings in effects</td>
+        <td><span class="badge badge-amber">Confirmed</span></td>
+        <td><code>npx oxlint src server</code> confirms 2 warnings: synchronous <code>setLoading(true)</code> in <code>ConceptSelectionGrid.jsx#L37</code> and <code>setPhase('briefing')</code> in <code>ProveUnderstandingStudio.jsx#L76</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>10</strong></td>
+        <td><code>AiVoiceRoom.jsx</code> is orphaned dead code</td>
+        <td><span class="badge badge-blue">Confirmed</span></td>
+        <td>Grep search confirms <code>src/components/AiVoiceRoom.jsx</code> (584 lines) is not imported or referenced anywhere. It was superseded by <code>ProveUnderstandingStudio.jsx</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 2: PROPOSED IMPLEMENTATION PLAN ==================== -->
+  <h2>Step 2: Phased Implementation Work Orders (A &rarr; G)</h2>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-blue">Work Order A</span>
+      Fix Lint Exclusions & React Effect Warnings
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Add <code>.vite_cache</code> and <code>dist</code> to <code>.gitignore</code> and configure <code>.oxlintrc.json</code> ignore patterns.</li>
+      <li>Update <code>package.json</code> lint script to <code>"oxlint src server"</code> as a dual-layer guard.</li>
+      <li>In <code>ConceptSelectionGrid.jsx</code>: remove synchronous <code>setLoading(true)</code> on effect entry; manage loading via async dispatch.</li>
+      <li>In <code>ProveUnderstandingStudio.jsx</code>: remove the 7 synchronous state resets on concept change; apply React 19 <code>key={selectedConcept?.id}</code> in <code>LectureTheater.jsx</code> to reset state cleanly without cascading re-renders.</li>
+      <li><em>Acceptance Criteria:</em> <code>npm run lint</code> passes with <strong>0 errors and 0 warnings</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-red">Work Order B</span>
+      Secure AI Evaluation via Server-Side Rubric Resolution
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Refactor <code>handleEvaluate</code> in <code>server/index.js</code>: require valid <code>conceptId</code> and <code>studentAnswer</code> (&ge; 5 characters).</li>
+      <li>Query authoritative concept in <code>server/curriculumDatabase.js</code> using <code>conceptId</code>. Return HTTP 400/404 if missing or invalid.</li>
+      <li><strong>Strict Boundary:</strong> Never read <code>mustKnowPoints</code> or <code>commonMisconceptions</code> from client payload. Inject only server-side authoritative criteria into the prompt.</li>
+      <li>Apply authoritative resolution and answer validation to <code>handleFollowUp</code> (<code>POST /api/evaluate/followup</code>).</li>
+      <li>If server API key is unconfigured or Gemini times out, return HTTP 503 with <code>{ fallbackToLocal: true }</code>.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-amber">Work Order C</span>
+      Remove Client API Key Storage & Direct Gemini Requests
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>In <code>src/services/aiVoiceService.js</code>: completely remove <code>callGeminiDirect()</code> and direct browser <code>fetch()</code> calls.</li>
+      <li>Routing becomes: <em>Browser Explains &rarr; Backend Proxy (<code>/api/evaluate</code>) &rarr; (fallback) Local Offline Socratic Engine</em>.</li>
+      <li>In <code>src/components/GeminiSettingsModal.jsx</code>: remove raw key input; rebrand into a secure <strong>"AI Diagnostic & Voice Settings"</strong> modal displaying server connection status, child privacy assurance, and TTS voice settings.</li>
+      <li>Remove <code>localStorage.getItem('gyan_gemini_key')</code> and <code>localStorage.setItem('gyan_gemini_key')</code> across all components.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-green">Work Order D</span>
+      Implement Missing Curriculum Endpoints
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Add <code>GET /api/curriculum/subjects</code> in <code>server/index.js</code> with <code>board</code> and <code>class</code> parameter validation (1–12).</li>
+      <li>Add <code>GET /api/curriculum/chapters</code> in <code>server/index.js</code> with <code>board</code>, <code>class</code>, and <code>subject</code> parameter validation.</li>
+      <li>Return authentic subjects and verified chapters. For in-development topics, return accurate metadata marked <code>status: "curation_pending"</code> instead of generating fake unit numbers.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-blue">Work Order E</span>
+      Unify Board Schema & Eliminate Chapter Fabrication
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Consolidate <code>BOARDS</code> into a single unified schema across frontend and backend (CBSE, ICSE, UP Board, and State Boards).</li>
+      <li>Ensure selecting any board in <code>curriculumData.js</code> properly matches without defaulting to UP Board.</li>
+      <li>In <code>curriculumData.js</code>: replace <code>generateChaptersForSubject()</code> procedural loops with authentic NCERT Rationalised syllabus chapter titles marked <code>status: 'curation_pending'</code>, eliminating fake repetitive quiz questions.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-red">Work Order F</span>
+      Safely Remove Orphaned Dead Code
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Confirm zero references, delete <code>src/components/AiVoiceRoom.jsx</code> (584 lines), and verify <code>npm run build</code> succeeds cleanly.</li>
+    </ul>
+  </div>
+
+  <div class="work-order">
+    <div class="work-order-title">
+      <span class="badge badge-green">Work Order G</span>
+      Vitest Automated Test Harness
+    </div>
+    <ul style="margin-bottom: 0;">
+      <li>Install <code>vitest</code> and add <code>"test": "vitest run"</code> to <code>package.json</code>.</li>
+      <li>Implement 5 automated test suites:
+        <br/>1. <code>tests/conceptGraphEngine.test.js</code>: DAG acyclic validation, prerequisite health, SM-2 interval calculations.
+        <br/>2. <code>tests/scoring.test.js</code>: local evaluation scoring bounds (0–100), must-know coverage, misconception penalties.
+        <br/>3. <code>tests/rubricSecurity.test.js</code>: reject invalid concept IDs; verify server ignores client-injected rubrics.
+        <br/>4. <code>tests/curriculumEndpoints.test.js</code>: verify <code>/boards</code>, <code>/classes</code>, <code>/subjects</code>, <code>/chapters</code>, and <code>/concepts</code>.
+        <br/>5. <code>tests/aiResponseValidation.test.js</code>: test <code>normalizeEvaluationResponse</code> against malformed or partial JSON.
+      </li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 3: PRESERVATION MATRIX ==================== -->
+  <h2>Step 3: Feature Preservation & Regression Guard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 30%;">Existing Feature</th>
+        <th style="width: 40%;">Core Preservation Mechanism</th>
+        <th style="width: 30%;">Regression Test Method</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Feynman Oral Recall Studio</strong></td>
+        <td>Retain 4-phase state machine, confetti triggers, and audio recording controls.</td>
+        <td>Verify oral proof UI and 5-pillar evaluation modal.</td>
+      </tr>
+      <tr>
+        <td><strong>Voice & Speech (Hindi / English)</strong></td>
+        <td>Preserve <code>SpeechManager</code> in <code>aiVoiceService.js</code> with language switching.</td>
+        <td>Test speech recognition and TTS playback controls.</td>
+      </tr>
+      <tr>
+        <td><strong>Offline Socratic Evaluation</strong></td>
+        <td>Preserve <code>evaluateLocally()</code> heuristic engine as fallback when server has no key.</td>
+        <td>Automated unit tests in <code>scoring.test.js</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Concept Graph Lineage</strong></td>
+        <td>Preserve DAG node visualizer and prerequisite health checks.</td>
+        <td>Automated tests in <code>conceptGraphEngine.test.js</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Spaced Repetition Queue</strong></td>
+        <td>Preserve SM-2 interval scheduler (1d, 3d, 7d) and overdue task queries.</td>
+        <td>Unit tests for interval calculations and dashboard display.</td>
+      </tr>
+      <tr>
+        <td><strong>Lecture Theater & Quizzes</strong></td>
+        <td>Preserve video marathon player, practice quizzes, and XP allocation.</td>
+        <td>Verify subject switching and quiz scoring.</td>
+      </tr>
+      <tr>
+        <td><strong>Profile Backups & Global Search</strong></td>
+        <td>Preserve JSON export/import functions and Ctrl+K search modal.</td>
+        <td>Test file download/upload and search filter results.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 4: VERIFICATION CHECKLIST ==================== -->
+  <h2>Step 4: Verification Protocol</h2>
+  <div class="card card-info" style="font-size: 8.5pt;">
+    <ol style="margin-left: 18px; margin-bottom: 0;">
+      <li><strong>Unit Testing:</strong> Run <code>npm test</code> and verify 100% test pass rate across all 5 test suites.</li>
+      <li><strong>Linter Verification:</strong> Run <code>npm run lint</code> and confirm 0 errors and 0 warnings.</li>
+      <li><strong>Production Build Verification:</strong> Run <code>npm run build</code> and confirm clean bundle generation.</li>
+      <li><strong>API Health & Security:</strong> Boot <code>node server/index.js</code> and verify health, curriculum routes, and rejection of invalid <code>conceptId</code>.</li>
+      <li><strong>Browser Testing:</strong> Test voice recording, offline evaluation, and UI interactions in a Chromium browser.</li>
+    </ol>
+  </div>
+
+  <div class="footer-note">
+    GyaanConnect Stabilization Sprint • Generated for Student Developer Review • Stored in <code>docs/GyaanConnect_Stabilization_Sprint_Plan.pdf</code>
+  </div>
+
+</body>
+</html>

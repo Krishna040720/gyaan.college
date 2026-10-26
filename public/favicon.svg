@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="p" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6C43A8"/>
+      <stop offset="100%" stop-color="#482C75"/>
+    </linearGradient>
+    <linearGradient id="t" x1="16" y1="6" x2="32" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1DD4C9"/>
+      <stop offset="100%" stop-color="#16A39A"/>
+    </linearGradient>
+    <linearGradient id="g" x1="20" y1="2" x2="28" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#p)"/>
+  <path d="M24 37C19.5 34 13.5 34 8 36V22C13.5 20.5 19.5 21 24 23.5V37Z" fill="#FFFFFF" fill-opacity="0.95"/>
+  <path d="M24 37C28.5 34 34.5 34 40 36V22C34.5 20.5 28.5 21 24 23.5V37Z" fill="#FFFFFF" fill-opacity="0.82"/>
+  <line x1="24" y1="23.5" x2="24" y2="37" stroke="#482C75" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M17 12C21.2 9.5 26.8 9.5 31 12" stroke="url(#t)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M20 15.5C22.4 14 25.6 14 28 15.5" stroke="#16A39A" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="24,14 27.5,18 24,22 20.5,18" fill="url(#g)"/>
+  <circle cx="24" cy="18" r="1.5" fill="#FFFFFF"/>
+</svg>

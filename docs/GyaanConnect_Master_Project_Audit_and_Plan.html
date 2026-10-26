@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GyaanConnect — Master Project Audit & Engineering Roadmap</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 14mm 15mm 14mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.45;
+      color: #1e293b;
+      background: #ffffff;
+    }
+
+    /* Header styling */
+    .header-banner {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .brand-title {
+      font-size: 20pt;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-accent {
+      color: #d97706;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tagline {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-size: 8pt;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: #64748b;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+      margin-bottom: 1px;
+    }
+
+    /* Section Headings */
+    h2 {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    /* Callout alert cards */
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background: #ffffff;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .card-critical {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      border-left: 4px solid #e11d48;
+    }
+
+    .card-warning {
+      background: #fffbeb;
+      border-color: #fef3c7;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .card-success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      border-left: 4px solid #10b981;
+    }
+
+    .card-info {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      border-left: 4px solid #3b82f6;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 5px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-red {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .badge-amber {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .badge-green {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .badge-blue {
+      background: #e0f2fe;
+      color: #075985;
+      border: 1px solid #7dd3fc;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin-left: 18px;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    li {
+      margin-bottom: 3px;
+    }
+
+    code {
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 8pt;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 3px;
+      border-radius: 3px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      padding-top: 8px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 8pt;
+      color: #64748b;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+
+    .roadmap-phase {
+      margin-bottom: 8px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="header-banner">
+    <div class="brand-row">
+      <div class="brand-title">Gyaan<span class="brand-accent">Connect</span></div>
+      <div class="doc-badge">Master Project Audit & Roadmap</div>
+    </div>
+    <div class="tagline">“Don't just watch the lesson. Prove that you understood it.”</div>
+    <p style="font-size: 8.5pt; color: #475569; margin-bottom: 6px;">
+      Voice-First Diagnostic Learning Platform for Indian School Students (Classes 1–12 • CBSE, ICSE, UPMSP & State Boards)
+    </p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <strong>Audit Date</strong>
+        October 15, 2026
+      </div>
+      <div class="meta-item">
+        <strong>Repository</strong>
+        GYAAN (React 19 + Node.js)
+      </div>
+      <div class="meta-item">
+        <strong>Audit Scope</strong>
+        Frontend, Backend, Security, AI, Data
+      </div>
+      <div class="meta-item">
+        <strong>Compliance Status</strong>
+        Phase 1 Audit Complete
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 1: ARCHITECTURE ==================== -->
+  <h2>1. Current Architecture Overview</h2>
+  <p>
+    The platform is structured as a client-centric single-page application paired with a lightweight Node.js API service:
+  </p>
+
+  <div class="card card-info">
+    <ul style="margin-bottom: 0;">
+      <li><strong>Frontend Layer:</strong> React 19 (<code>^19.2.8</code>), Vite 8 (<code>^8.2.2</code>), Tailwind CSS v4 (<code>^4.3.3</code>), Lucide icons, and Canvas Confetti.</li>
+      <li><strong>Backend Layer:</strong> Native Node.js ESM HTTP service (<code>server/index.js</code>) on port 3001, reverse-proxied in development via Vite (<code>/api</code> &rarr; <code>http://localhost:3001</code>).</li>
+      <li><strong>3-Tier AI Evaluation Pipeline:</strong>
+        <br/>&bull; <em>Tier 1 (Server Proxy):</em> <code>POST /api/evaluate</code> calls Google Gemini API with server-side credentials.
+        <br/>&bull; <em>Tier 2 (Client Fallback):</em> Optional client key entered in modal (stored in localStorage; marked for removal).
+        <br/>&bull; <em>Tier 3 (Local Socratic Engine):</em> 100% offline, zero-cost heuristic evaluator matching must-know points and detecting misconceptions.
+      </li>
+      <li><strong>Pedagogical DAG Engine:</strong> Directed Acyclic Graph dependency model (<code>conceptGraphEngine.js</code>) mapping ancestral prerequisites and diagnosing foundational learning gaps.</li>
+      <li><strong>Spaced Repetition Scheduler:</strong> Implementation of the SuperMemo SM-2 algorithm scheduling review sessions at 1-day, 3-day, and 7-day intervals based on student accuracy.</li>
+      <li><strong>Native Audio Synthesis:</strong> Web Audio API oscillators producing zero-latency auditory feedback for clicks, success chords, and error tones without external MP3 dependencies.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== SECTION 2: WORKING FEATURES ==================== -->
+  <h2>2. Working Features Matrix</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Feature Module</th>
+        <th style="width: 33%;">Implementation Files</th>
+        <th style="width: 14%;">Status</th>
+        <th style="width: 28%;">Verified Capabilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Feynman Oral Recall Studio</strong></td>
+        <td><code>src/components/ProveUnderstandingStudio.jsx</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>4-phase workflow (briefing &rarr; explaining &rarr; evaluating &rarr; evaluated); 5-pillar scores; confetti reward.</td>
+      </tr>
+      <tr>
+        <td><strong>Voice Recognition & Synthesis</strong></td>
+        <td><code>src/services/aiVoiceService.js</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>Web Speech API for Indian English (<code>en-IN</code>) and Hindi (<code>hi-IN</code>); SpeechSynthesis tutor read-aloud; quiet text fallback.</td>
+      </tr>
+      <tr>
+        <td><strong>Concept Graph Lineage</strong></td>
+        <td><code>src/components/ConceptGraphModal.jsx</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>DAG visualizer; identifies prerequisite health; warns when foundational concepts have &lt;60% mastery.</td>
+      </tr>
+      <tr>
+        <td><strong>Spaced Repetition Queue</strong></td>
+        <td><code>src/components/DashboardOverview.jsx</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>SM-2 algorithm calculates decay; dashboard displays overdue review items with 1-click oral retry.</td>
+      </tr>
+      <tr>
+        <td><strong>Lecture & Study Theater</strong></td>
+        <td><code>src/components/LectureTheater.jsx</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>Curated video lectures, one-shot marathons, tab switching across Feynman studio, notes, quizzes, and concepts.</td>
+      </tr>
+      <tr>
+        <td><strong>Practice MCQs & Gamification</strong></td>
+        <td><code>PracticeQuiz.jsx</code>, <code>gamificationService.js</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>Interactive MCQ arena, instant explanations, anti-spam XP awarding, daily streaks, level progression.</td>
+      </tr>
+      <tr>
+        <td><strong>Local Data Backup Export/Import</strong></td>
+        <td><code>StudentProfileModal.jsx</code>, <code>studentService.js</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>One-click JSON file download and restore for local student progress and badges.</td>
+      </tr>
+      <tr>
+        <td><strong>Global Search (Ctrl+K)</strong></td>
+        <td><code>src/components/GlobalSearchModal.jsx</code></td>
+        <td><span class="badge badge-green">Working</span></td>
+        <td>Unified modal searching across concepts, chapters, subjects, and boards with keyboard shortcut.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 3: CONFIRMED ERRORS ==================== -->
+  <h2>3. Confirmed Errors & Missing Features</h2>
+
+  <div class="card card-critical">
+    <div style="font-weight: 700; color: #991b1b; margin-bottom: 2px;">
+      🚨 Linter Failure: <code>npm run lint</code> Exits with Code 1
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 2px;">
+      <strong>Root Cause:</strong> <code>vite.config.js</code> defines <code>cacheDir: './.vite_cache'</code>, but <code>.oxlintrc.json</code> and <code>.gitignore</code> do not exclude <code>.vite_cache</code>. Oxlint scans pre-bundled vendor dependencies (<code>lucide-react.js</code>), failing with <strong>3,186 warnings and 14 errors</strong>.
+    </p>
+    <p style="font-size: 8pt; color: #64748b; margin-bottom: 0;">
+      <em>Targeted command:</em> <code>npx oxlint src server</code> succeeds with 0 errors and 2 minor effect warnings.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div style="font-weight: 700; color: #92400e; margin-bottom: 2px;">
+      ⚠️ Missing Backend Routes: HTTP 404 on Curriculum API Calls
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      <code>curriculumService.js</code> queries <code>GET /api/curriculum/subjects</code> and <code>GET /api/curriculum/chapters</code>, but neither endpoint exists in <code>server/index.js</code>. The server returns 404, which the client silently catches and falls back to local data.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div style="font-weight: 700; color: #92400e; margin-bottom: 2px;">
+      ⚠️ Conflicting Board Definitions & Procedural Chapter Fabrication
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 2px;">
+      <strong>Data Fragmentation:</strong> <code>conceptKnowledgeBase.js</code> defines 9 boards, <code>curriculumDatabase.js</code> defines 5 boards, and <code>curriculumData.js</code> defines only 3 boards. Selecting Maharashtra, Rajasthan, or Bihar causes <code>getGradeData()</code> to default back to UP Board.
+    </p>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      <strong>Mock Masquerading:</strong> Only Class 10 Science & Math have authentic syllabi. For all other grades (Classes 1–9, 11, 12), <code>generateChaptersForSubject()</code> synthesizes dummy titles (<em>"Chapter 1: Mathematics - Unit 1"</em>) and generic quizzes.
+    </p>
+  </div>
+
+  <div class="card card-info">
+    <div style="font-weight: 700; color: #1e40af; margin-bottom: 2px;">
+      ℹ️ Dead / Orphaned Code
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      <code>src/components/AiVoiceRoom.jsx</code> (584 lines, 24.8 KB) is completely unreferenced and superseded by <code>ProveUnderstandingStudio.jsx</code>.
+    </p>
+  </div>
+
+  <h3>Missing Features Against Master Project Requirements:</h3>
+  <ul style="font-size: 8.5pt;">
+    <li><strong>Materials & Practical Instructions:</strong> No structured lab apparatus list, safety guidelines, or step-by-step experiment instructions.</li>
+    <li><strong>Real-World Examples & News Links:</strong> No connection of curriculum concepts to contemporary science news (e.g. ISRO missions).</li>
+    <li><strong>Server-Side Progress Persistence:</strong> No user database; all data is strictly in browser <code>localStorage</code>.</li>
+    <li><strong>Automated Testing:</strong> Zero unit, integration, or end-to-end tests exist in the project.</li>
+  </ul>
+
+  <!-- ==================== SECTION 4: SECURITY CONCERNS ==================== -->
+  <h2>4. Security & Privacy Audit</h2>
+
+  <div class="card card-critical">
+    <div style="font-weight: 700; color: #991b1b; margin-bottom: 2px;">
+      🚨 Critical: Insecure Evaluation Rubric Injection (Prompt Tampering)
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 2px;">
+      In <code>server/index.js</code> (lines 38–60), the backend blindly constructs the evaluation prompt using <code>concept.mustKnowPoints</code> provided in the client's HTTP request body:
+    </p>
+    <code style="display: block; padding: 4px; margin: 3px 0;">
+      Must-Know Core Points: ${JSON.stringify(targetConcept.mustKnowPoints || [])}
+    </code>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      A student or malicious script can send arbitrary <code>mustKnowPoints</code> matching their exact words to score 100%. The server <strong>must</strong> look up trusted rubrics from <code>curriculumDatabase.js</code> using <code>conceptId</code>.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div style="font-weight: 700; color: #92400e; margin-bottom: 2px;">
+      ⚠️ Client-Side API Key Storage & Direct Gemini Calls
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      <code>GeminiSettingsModal.jsx</code> saves Gemini API keys to <code>localStorage</code>, and <code>aiVoiceService.js</code> directly initiates raw browser fetch requests to Google's API endpoint. This risks credential exposure to browser extensions and shared school PCs.
+    </p>
+  </div>
+
+  <div class="card card-success">
+    <div style="font-weight: 700; color: #166534; margin-bottom: 2px;">
+      ✅ Child Privacy & Audio Retention Compliance
+    </div>
+    <p style="font-size: 8.5pt; margin-bottom: 0;">
+      Audio is never recorded, retained, or transmitted to third-party cloud servers. Speech recognition occurs entirely in browser memory through the native Web Speech API.
+    </p>
+  </div>
+
+  <!-- ==================== SECTION 5: BUILD & TEST RESULTS ==================== -->
+  <h2>5. Build and Test Verification Results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Verification Command</th>
+        <th style="width: 25%;">Execution Output</th>
+        <th style="width: 14%;">Status</th>
+        <th style="width: 36%;">Actionable Conclusion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>npm run lint</code></td>
+        <td>Scanned 36 files; 3,186 warnings, 14 errors.</td>
+        <td><span class="badge badge-red">Failed</span></td>
+        <td>Fails because <code>.vite_cache</code> is scanned. Must exclude cache from oxlint.</td>
+      </tr>
+      <tr>
+        <td><code>npx oxlint src server</code></td>
+        <td>27 files checked; 0 errors, 2 warnings.</td>
+        <td><span class="badge badge-green">Passed</span></td>
+        <td>Core source code is clean; only 2 cascading <code>setState</code> warnings in effects.</td>
+      </tr>
+      <tr>
+        <td><code>npm run build</code></td>
+        <td>1,872 modules transformed; completed in 6.56s.</td>
+        <td><span class="badge badge-green">Passed</span></td>
+        <td>Vite production bundle generated successfully (JS: 469.75 kB, CSS: 68.71 kB).</td>
+      </tr>
+      <tr>
+        <td><code>node server/index.js</code></td>
+        <td>Listens on port 3001; health returns HTTP 200.</td>
+        <td><span class="badge badge-green">Passed</span></td>
+        <td>Server starts cleanly; returns HTTP 503 fallback when <code>GEMINI_API_KEY</code> is blank.</td>
+      </tr>
+      <tr>
+        <td><code>npm test</code></td>
+        <td>Script missing from <code>package.json</code>.</td>
+        <td><span class="badge badge-red">Missing</span></td>
+        <td>Zero automated unit, integration, or E2E tests exist in the project.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ==================== SECTION 6: ROADMAP ==================== -->
+  <h2>6. Recommended Phased Implementation Roadmap</h2>
+  <div style="font-size: 8.5pt;">
+    <div class="roadmap-phase">
+      <strong>Phase 1: Stabilization & Security Hardening (Current Priority)</strong>
+      <ul style="margin-top: 2px;">
+        <li>Exclude <code>.vite_cache</code> and <code>dist</code> from <code>.oxlintrc.json</code> and <code>.gitignore</code> so <code>npm run lint</code> passes with 0 errors.</li>
+        <li>Fix cascading <code>setState</code> calls in <code>ConceptSelectionGrid.jsx</code> and <code>ProveUnderstandingStudio.jsx</code>.</li>
+        <li>Hardcode server rubric lookup: enforce that <code>POST /api/evaluate</code> retrieves authoritative concepts via <code>conceptId</code>.</li>
+        <li>Implement missing <code>/api/curriculum/subjects</code> and <code>/api/curriculum/chapters</code> endpoints in <code>server/index.js</code>.</li>
+        <li>Safely remove dead code (<code>AiVoiceRoom.jsx</code>).</li>
+        <li>Install Vitest and setup test harness for scoring, DAG prerequisite traversal, and API response validation.</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 2: Curriculum Schema & Data Unification</strong>
+      <ul style="margin-top: 2px;">
+        <li>Merge competing Board definitions into a single authoritative schema.</li>
+        <li>Eliminate fake procedural chapter loops; label uncurated topics as <code>draft</code> or <code>curation_pending</code>.</li>
+        <li>Attach official syllabus provenance (NCERT Rationalised 2026-27 citations).</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 3: Voice Learning & Studio Accessibility (WCAG 2.1 AA)</strong>
+      <ul style="margin-top: 2px;">
+        <li>Add accessible ARIA live regions, clear microphone recording pulse indicators, and full keyboard navigation.</li>
+        <li>Enhance quiet-room text-input mode and provide pause/stop/replay speech controls.</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 4: Socratic AI & Diagnostic Evaluation Engine</strong>
+      <ul style="margin-top: 2px;">
+        <li>Upgrade backend integration to current standard Gemini models with structured JSON schema validation.</li>
+        <li>Multi-turn Socratic follow-up intuition probes; student feedback error-reporting button.</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 5: Student Progress & Persistent Cloud Synchronization</strong>
+      <ul style="margin-top: 2px;">
+        <li>Transition to optional server persistence with clear distinction between local and cloud progress.</li>
+        <li>Authentic completion criteria (never mark complete solely on view).</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 6: Practical Lab Activities & Real-World Science News</strong>
+      <ul style="margin-top: 2px;">
+        <li>Integrate CBSE/UP Board Science practical apparatus, safety instructions, and step-by-step procedures.</li>
+        <li>Curated age-appropriate science news links (ISRO, renewable technology, scientific discoveries).</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <strong>Phase 7: Multi-Board Expansion & Official Verification</strong>
+      <ul style="margin-top: 2px;">
+        <li>Progressive verified rollout: CBSE &rarr; UP Board (Bilingual) &rarr; ICSE &rarr; Major State Boards.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== SECTION 7: SMALLEST SAFE NEXT TASK ==================== -->
+  <h2>7. The Smallest Safe Next Task</h2>
+  <div class="card card-success">
+    <div style="font-weight: 700; color: #166534; font-size: 10.5pt; margin-bottom: 4px;">
+      Zero-Risk Pipeline & Codebase Health Stabilization
+    </div>
+    <ol style="margin-left: 18px; font-size: 8.5pt; margin-bottom: 4px;">
+      <li>Add <code>".vite_cache"</code> and <code>"dist"</code> to <code>.gitignore</code> and configure <code>.oxlintrc.json</code> ignore patterns.</li>
+      <li>Fix the two cascading <code>setState</code> warnings in <code>ConceptSelectionGrid.jsx</code> and <code>ProveUnderstandingStudio.jsx</code>.</li>
+      <li>Safely remove the unused, orphaned <code>src/components/AiVoiceRoom.jsx</code> file.</li>
+      <li>Run <code>npm run lint</code> and <code>npm run build</code> to confirm <strong>100% green status with 0 errors and 0 warnings</strong>.</li>
+    </ol>
+    <p style="font-size: 8pt; color: #166534; margin-bottom: 0;">
+      <em>Estimated Time: ~5 minutes. Modifies zero core application behavior; provides a rock-solid, error-free foundation.</em>
+    </p>
+  </div>
+
+  <div class="footer-note">
+    GyaanConnect Master Technical Specification • Generated for Student Developer Pair Programming Session • Stored in <code>docs/PROJECT_AUDIT.md</code>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+/* GyaanConnect Application Styles */
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #56358B;
+  outline-offset: 2px;
+}
+
+/* Glass panel effects */
+.gyan-glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #E9E5EF;
+}
+
+/* Gentle pulse for active voice recording */
+@keyframes gyan-pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+.animate-pulse-slow {
+  animation: gyan-pulse-slow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Print styles for chapter notes */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, .no-print {
+    display: none !important;
+  }
+}
