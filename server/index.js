@@ -1136,6 +1136,40 @@ export function createServer() {
       return handleCleanTranscript(req, res);
     }
 
+    // Static file serving from dist/ (Frontend UI) for non-API GET/HEAD requests
+    if ((req.method === 'GET' || req.method === 'HEAD') && !url.pathname.startsWith('/api')) {
+      const distDir = path.resolve(process.cwd(), 'dist');
+      if (fs.existsSync(distDir)) {
+        const cleanPath = url.pathname.replace(/^\/+/, '') || 'index.html';
+        const candidateFile = path.resolve(distDir, cleanPath);
+        const targetFile = (candidateFile.startsWith(distDir) && fs.existsSync(candidateFile) && fs.statSync(candidateFile).isFile())
+          ? candidateFile
+          : path.resolve(distDir, 'index.html');
+
+        if (fs.existsSync(targetFile)) {
+          const ext = path.extname(targetFile).toLowerCase();
+          const mimeTypes = {
+            '.html': 'text/html; charset=utf-8',
+            '.js': 'application/javascript; charset=utf-8',
+            '.css': 'text/css; charset=utf-8',
+            '.json': 'application/json',
+            '.svg': 'image/svg+xml',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.ico': 'image/x-icon'
+          };
+          res.writeHead(200, {
+            'Content-Type': mimeTypes[ext] || 'application/octet-stream',
+            'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=31536000'
+          });
+          if (req.method === 'HEAD') {
+            return res.end();
+          }
+          return fs.createReadStream(targetFile).pipe(res);
+        }
+      }
+    }
+
     sendJson(res, 404, { error: 'Route not found' });
   });
 }
