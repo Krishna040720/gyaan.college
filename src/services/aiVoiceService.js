@@ -594,9 +594,7 @@ export async function explainStudentDoubt({
   const notesSnippet = concept?.description || (concept?.mustKnowPoints?.[0]) || chapter?.keyPoints?.[0] || '';
 
   // Try calling backend /api/doubt
-  const doubtUrl = (typeof window !== 'undefined' && window.location?.origin)
-    ? `${window.location.origin}/api/doubt`
-    : (process.env.API_BASE_URL || 'http://127.0.0.1:3001') + '/api/doubt';
+  const doubtUrl = '/api/doubt';
 
   try {
     const res = await fetch(doubtUrl, {
@@ -1036,9 +1034,7 @@ export async function evaluateStudentExplanation({
     simulateFailure: Boolean(simulateFailure)
   };
 
-  const evaluateUrl = (typeof window !== 'undefined' && window.location?.origin)
-    ? `${window.location.origin}/api/evaluate`
-    : (process.env.API_BASE_URL || 'http://127.0.0.1:3001') + '/api/evaluate';
+  const evaluateUrl = '/api/evaluate';
 
   try {
     const backendRes = await fetch(evaluateUrl, {

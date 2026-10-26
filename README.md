@@ -107,6 +107,71 @@ flutter run
 
 ---
 
+## ☁️ Deployment on Render (Linux)
+
+GYAAN is fully prepared for zero-downtime, continuous deployment on Render (Linux) via **Render Blueprints** or manual service creation.
+
+### Option A: 1-Click Render Blueprint (Recommended)
+This repository includes a pre-configured [`render.yaml`](file:///c:/Users/krish/OneDrive/GYAAN/render.yaml) declaring both services:
+1. Log in to your [Render Dashboard](https://dashboard.render.com/).
+2. Click **New +** $\rightarrow$ **Blueprint**.
+3. Connect your repository: `https://github.com/Krishna040720/gyaan.college`.
+4. Render will detect `render.yaml` and provision:
+   - **`gyaan-api`** (Node.js Web Service on port `10000` / `0.0.0.0`)
+   - **`gyaan-frontend`** (Static Site with SPA routing and `/api/*` reverse proxy)
+5. Under Environment Secrets, set `GEMINI_API_KEY` (if using Google Gemini API).
+6. Click **Apply**.
+
+---
+
+### Option B: Manual Service Setup on Render
+
+#### 1. Backend Web Service (`gyaan-api`)
+- **Type:** Web Service
+- **Environment:** Node
+- **Region:** Any (e.g., Oregon)
+- **Branch:** `main`
+- **Build Command:** `npm install`
+- **Start Command:** `npm run server`
+- **Plan:** Free
+- **Health Check Path:** `/api/health`
+- **Environment Variables:**
+  | Variable | Value | Purpose |
+  | :--- | :--- | :--- |
+  | `NODE_ENV` | `production` | Production optimizations |
+  | `PORT` | `10000` | Port assigned by Render (listens on `0.0.0.0`) |
+  | `GEMINI_API_KEY` | *(your key)* | Google Gemini AI key (kept in env, not committed) |
+  | `LLM_PROVIDER` | `gemini_free` | Free tier LLM provider |
+  | `STT_PROVIDER` | `web_speech` | Client-side speech-to-text |
+  | `TTS_PROVIDER` | `browser_speech` | Natural speech synthesis |
+  | `RETRIEVAL_PROVIDER` | `sqlite_local` | In-memory / lightweight curriculum vector search |
+
+#### 2. Frontend Static Site (`gyaan-frontend`)
+- **Type:** Static Site
+- **Branch:** `main`
+- **Build Command:** `npm install && npm run build`
+- **Publish Directory:** `dist`
+- **Redirects / Rewrites (Under Site Settings $\rightarrow$ Redirects/Rewrites):**
+  1. **API Proxy Rewrite:**
+     - **Type:** Rewrite
+     - **Source:** `/api/*`
+     - **Destination:** `https://gyaan-api.onrender.com/api/*`
+  2. **Single-Page Application (SPA) Fallback:**
+     - **Type:** Rewrite
+     - **Source:** `/*`
+     - **Destination:** `/index.html`
+
+---
+
+### 🛡️ Ephemeral Filesystem & Startup Seeding Guarantee
+Render free instances run on ephemeral containers with non-persistent filesystems. To guarantee the platform is 100% operational on every restart:
+- On startup, `server/index.js` automatically executes `seedDemoData()`.
+- Seeds the comprehensive curriculum, the flagship chapter (**Class 10 Science: Electricity**), and a sample student account labelled **"Demo data"** (`Aarav Sharma (Demo data)`).
+- The `/api/health` endpoint verifies demo seed status on every container boot.
+- Voice Debug admin routes require `x-user-role: admin` (HTTP 403 Forbidden for non-admins). Demo-seed buttons are removed from production.
+
+---
+
 ## 🧪 Automated Testing & Verification
 
 Run the full backend test suite verifying curriculum rules, class counts, subject isolation, chapter provenance, and API health:

@@ -36,7 +36,6 @@ import {
 } from '../services/aiVoiceService';
 import { soundService } from '../services/soundService';
 import { progressService } from '../services/progressService';
-import { gamificationService } from '../services/gamificationService';
 import { conceptGraphEngine } from '../services/conceptGraphEngine';
 
 export default function ProveUnderstandingStudio({
@@ -58,7 +57,6 @@ export default function ProveUnderstandingStudio({
   const [guidanceData, setGuidanceData] = useState(null);
   const [showExampleAnswer, setShowExampleAnswer] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [interimText, setInterimText] = useState('');
   const [textInput, setTextInput] = useState('');
   const [selectedLang, setSelectedLang] = useState('en-IN'); // 'en-IN' | 'hi-IN'
   const [micError, setMicError] = useState('');

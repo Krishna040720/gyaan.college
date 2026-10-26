@@ -1,0 +1,52 @@
+# Render Blueprint Specification for GYAAN Platform
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # ============================================================================
+  # 1. Web Service: GYAAN AI Backend API (Node.js)
+  # ============================================================================
+  - type: web
+    name: gyaan-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: GEMINI_API_KEY
+        sync: false # Set via Render Dashboard Environment Secrets
+      - key: LLM_PROVIDER
+        value: gemini_free
+      - key: STT_PROVIDER
+        value: web_speech
+      - key: TTS_PROVIDER
+        value: browser_speech
+      - key: RETRIEVAL_PROVIDER
+        value: sqlite_local
+
+  # ============================================================================
+  # 2. Static Site: GYAAN AI Web Client (React + Vite)
+  # ============================================================================
+  - type: web
+    name: gyaan-frontend
+    runtime: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      # Proxy /api/* calls directly to the GYAAN API Web Service
+      - type: rewrite
+        source: /api/*
+        destination: https://gyaan-api.onrender.com/api/*
+      # Single-Page Application (SPA) fallback to index.html
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_ENV
+        value: production

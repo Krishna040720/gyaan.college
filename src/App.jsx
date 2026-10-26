@@ -27,11 +27,7 @@ import {
   FileText, 
   GitBranch, 
   Play, 
-  BookOpen, 
-  Layers, 
-  List, 
-  Sparkles,
-  ChevronRight
+  Layers 
 } from 'lucide-react';
 import { getGradeData, validateContentContext } from './data/curriculumData';
 import { BOARDS } from './data/boardsRegistry';

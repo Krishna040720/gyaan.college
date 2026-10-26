@@ -62,7 +62,7 @@ export class GeminiVisionProvider extends BaseVisionProvider {
     const textOutput = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     
     // Extract formulas
-    const formulaMatches = textOutput.match(/(\$[^\$]+\$)|(\\\([^\)]+\\\))|([A-Za-z]\s*=\s*[^,\n]+)/g) || [];
+    const formulaMatches = textOutput.match(/(\$[^$]+\$)|(\\\([^)]+\\\))|([A-Za-z]\s*=\s*[^,\n]+)/g) || [];
 
     return {
       text: textOutput,
